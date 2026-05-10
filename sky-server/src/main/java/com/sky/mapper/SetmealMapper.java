@@ -1,10 +1,13 @@
 package com.sky.mapper;
 
+import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
+import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Setmeal;
+import com.sky.entity.SetmealDish;
 import com.sky.enumeration.OperationType;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import com.sky.vo.SetmealVO;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -20,4 +23,27 @@ public interface SetmealMapper {
     Integer countByCategoryId(Long id);
 
     List<Setmeal> selectByIds(List<Long> ids);
+
+    @AutoFill(operationType =  OperationType.INSERT)
+    void addMeal(Setmeal setmeal);
+
+    void addMealDish(List<SetmealDish> setmealDish);
+
+    Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+    @Delete("delete from setmeal where id = #{id}")
+    void deleteById(Long setmealId);
+
+    @Delete("delete from setmeal_dish where setmeal_id = #{setmealId}")
+    void deleteBySetmealId(Long setmealId);
+
+    @Select("select * from setmeal where id=#{id}")
+    Setmeal getById(Long id);
+
+    @Select("select * from setmeal_dish where setmeal_id = #{setmealId}")
+    List<SetmealDish> getBySetmealId(Long setmealId);
+
+    void update(Setmeal setmeal);
+
+
 }

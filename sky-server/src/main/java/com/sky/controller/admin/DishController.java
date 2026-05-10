@@ -53,4 +53,13 @@ public class DishController {
         DishVO dish = dishService.getDishById(id);
         return Result.success(dish);
     }
+
+    @GetMapping("/list")
+    public Result<List<Dish>> getDishByCategoryId(@RequestParam Long categoryId){
+        List<Dish> dish = dishService.getDishByCategoryId(categoryId);
+        return Result.success(dish);
+    }
+
+
+
 }
