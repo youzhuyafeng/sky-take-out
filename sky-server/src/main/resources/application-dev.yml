@@ -7,7 +7,7 @@ sky:
     username: root
     password: ad20041102
   alioss:
-    access-key-id:
+    access-key-id: LTAI5t9s8L45q5sEFKJA5seE
     access-key-secret:
     bucket-name: javaweb-chenbolin
     endpoint: oss-cn-beijing.aliyuncs.com
@@ -16,3 +16,6 @@ sky:
     port: 6379
     password:
     database: 2
+  wechat:
+    appid: wx7fce171dd6af4541
+    secret:
