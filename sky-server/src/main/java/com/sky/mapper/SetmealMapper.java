@@ -6,6 +6,7 @@ import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Setmeal;
 import com.sky.entity.SetmealDish;
 import com.sky.enumeration.OperationType;
+import com.sky.vo.DishItemVO;
 import com.sky.vo.SetmealVO;
 import org.apache.ibatis.annotations.*;
 
@@ -22,7 +23,7 @@ public interface SetmealMapper {
     @Select("select count(id) from setmeal where category_id = #{categoryId}")
     Integer countByCategoryId(Long id);
 
-    List<Setmeal> selectByIds(List<Long> ids);
+    List<SetmealDish> selectByIds(List<Long> ids);
 
     @AutoFill(operationType =  OperationType.INSERT)
     void addMeal(Setmeal setmeal);
@@ -45,5 +46,10 @@ public interface SetmealMapper {
 
     void update(Setmeal setmeal);
 
+    List<Setmeal> list(Setmeal setmeal);
 
+    @Select("select sd.name, sd.copies, d.image, d.description " +
+            "from setmeal_dish sd left join dish d on sd.dish_id = d.id " +
+            "where sd.setmeal_id = #{setmealId}")
+    List<DishItemVO> getDishItemBySetmealId(Long setmealId);
 }
