@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -39,12 +40,12 @@ public class ReportServiceImpl implements ReportService {
             map.put("begin",tBegin);
             map.put("end",tEnd);
             map.put("status", Orders.COMPLETED);
-            Double result = orderMapper.addAmountByDate(map);
-            result = result==null?0:result;
-            turnoverList.add(result);
+            dateQueryList.add(map);
         }
-
-
+        Map<String, BigDecimal> resultMap = orderMapper.addAmountByDate(dateQueryList);
+        for(int i=0;i<dateQueryList.size();i++){
+            turnoverList.add(resultMap.get("date_"+i).doubleValue());
+        }
 
 
         return TurnoverReportVO.builder()

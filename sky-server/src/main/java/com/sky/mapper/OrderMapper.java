@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -33,5 +34,5 @@ public interface OrderMapper {
     @Update("update orders set status=#{orders.status} where status=#{orderStatus}")
     void changeStatus(@Param("orders")Orders orders, @Param("orderStatus")Integer orderStatus);
 
-    Double addAmountByDate(Map<String, Object> map);
+    Map<String, BigDecimal> addAmountByDate(List<Map<String, Object>> dateQueryList);
 }
