@@ -8,7 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {
@@ -31,4 +32,6 @@ public interface OrderMapper {
 
     @Update("update orders set status=#{orders.status} where status=#{orderStatus}")
     void changeStatus(@Param("orders")Orders orders, @Param("orderStatus")Integer orderStatus);
+
+    Double addAmountByDate(Map<String, Object> map);
 }
