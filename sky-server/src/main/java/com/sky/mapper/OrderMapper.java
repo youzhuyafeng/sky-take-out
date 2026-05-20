@@ -35,4 +35,19 @@ public interface OrderMapper {
     void changeStatus(@Param("orders")Orders orders, @Param("orderStatus")Integer orderStatus);
 
     Map<String, BigDecimal> addAmountByDate(List<Map<String, Object>> dateQueryList);
+
+    Integer countByMap(Map map);
+
+    Double sumByMap(Map map);
+
+    Integer count(List<Map> list);
+
+    Map<String, BigDecimal> countByStatus(@Param("dateList")List<Map<String, Object>> dateQueryList,
+                                          @Param("status") Integer status);
+
+    @Select("select od.name as name,sum(od.amount) as count from order_detail od left join orders o on od.order_id=o.id "+
+            "where o.order_time>#{map.begin} and o.order_time<#{map.end} and o.status=#{map.status} "+
+            "group by od.name order by count desc limit 0,10")
+    List<Map<String, Object>> top10Dishs(@Param("map")Map<String, Object> map);
+
 }

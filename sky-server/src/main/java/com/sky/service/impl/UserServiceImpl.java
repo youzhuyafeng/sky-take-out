@@ -16,9 +16,11 @@ import com.sky.service.UserService;
 import com.sky.utils.HttpClientUtil;
 import com.sky.utils.JwtUtil;
 import com.sky.vo.UserLoginVO;
+import com.sky.vo.UserReportVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,4 +75,5 @@ public class UserServiceImpl implements UserService {
         return new UserLoginVO(user.getId(),openId,token);
 
     }
+
 }
