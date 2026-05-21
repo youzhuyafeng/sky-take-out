@@ -1,10 +1,7 @@
 package com.sky.mapper;
 
 import com.sky.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,7 +17,7 @@ public interface UserMapper {
             " values (#{openid},#{name},#{phone},#{sex},#{idNumber},#{avatar},#{createTime})")
     void addUser(User user);
 
-    Integer countByMap(Map map);
+    Integer countByMap(@Param("map")Map map);
 
     Map<String, BigDecimal> countUser(List<Map<String, Object>> dateQueryList);
 }

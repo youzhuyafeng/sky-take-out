@@ -63,4 +63,37 @@
         </foreach>
         from orders
     </select>
+    <select id="countByMap" resultType="java.lang.Integer">
+        select
+            sum(
+            case when
+            <if test="map['begin'] != null">
+                order_time &gt; #{map.begin}
+            </if>
+            <if test="map['end'] != null">
+                and order_time &lt; #{map.end}
+            </if>
+            <if test="map['status'] != null">
+                and status=#{map.status}
+            </if>
+            then 1 else 0 end)
+        from orders
+    </select>
+
+    <select id="sumByMap" resultType="java.lang.Double">
+        select
+        sum(
+        case when
+        <if test="map['begin'] != null">
+            order_time &gt; #{map.begin}
+        </if>
+        <if test="map['end'] != null">
+            and order_time &lt; #{map.end}
+        </if>
+        <if test="map['status'] != null">
+            and status=#{map.status}
+        </if>
+        then amount else 0 end)
+        from orders
+    </select>
 </mapper>

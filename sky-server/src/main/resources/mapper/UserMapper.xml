@@ -17,4 +17,17 @@
         </foreach>
         from user
     </select>
+    <select id="countByMap" resultType="java.lang.Integer">
+        select
+        sum(
+        case when
+        <if test="map['end'] != null">
+            create_time &lt; #{map.end}
+        </if>
+        <if test="map['begin'] != null">
+            and create_time &gt; #{map.begin}
+        </if>
+        then 1 else 0 end)
+        from user
+    </select>
 </mapper>

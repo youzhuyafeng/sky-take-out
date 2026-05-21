@@ -49,12 +49,13 @@ public class WorkspaceServiceImpl implements WorkspaceService {
          * 新增用户：当日新增用户的数量
          */
 
+
         Map map = new HashMap();
         map.put("begin",begin);
         map.put("end",end);
 
         //查询总订单数
-        Integer totalOrderCount = orderMapper.count(Arrays.asList(map));
+        Integer totalOrderCount = orderMapper.countByMap(map);
 
         map.put("status", Orders.COMPLETED);
         //营业额

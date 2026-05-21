@@ -36,9 +36,9 @@ public interface OrderMapper {
 
     Map<String, BigDecimal> addAmountByDate(List<Map<String, Object>> dateQueryList);
 
-    Integer countByMap(Map map);
+    Integer countByMap(@Param("map") Map map);
 
-    Double sumByMap(Map map);
+    Double sumByMap(@Param("map") Map map);
 
     Integer count(List<Map> list);
 
